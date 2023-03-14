@@ -1,0 +1,82 @@
+intents:
+- greet
+- goodbye
+- affirm
+- deny
+- bot_challenge
+- card_lost
+- card_stolen
+- kartensperre
+- out_of_scope
+
+entities:
+  - cardtype
+  - verlustart
+
+slots:
+   cardtype:
+      type: categorical
+      values:
+      - bankomatkarte
+      - kreditkarte
+      - karte
+   verlustart:
+      type: categorical
+      values:
+      - verlust
+      - diebstahl
+      - sonstiges
+
+templates:
+  utter_greet:
+  - text: 'Hallo! '
+  - text: Servus!
+  - text: Grüß Gott!
+  - text: Guten Tag!
+  utter_what_can_i_do:
+  - text: Was kann ich für Sie tun?
+  utter_goodbye:
+  - text: Ciao
+  - text: Tschüss
+  - text: Auf Wiederhören
+  - text: Schönen Tag
+  utter_iamabot:
+  - text: Erwischt! Ich bin ein Bot, powered by Contexity.
+  utter_which_cardtype:
+  - text: "Um welchen Kartentyp handelt es sich?"
+    buttons:
+    - title: "Bankomatkarte"
+      payload: '/card_lost{"cardtype": "bankomatkarte"}'
+    - title: "Kreditkarte"
+      payload: '/card_lost{"cardtype": "kreditkarte"}'
+  utter_which_verlustart:
+  - text: "Um welchen Kartentyp handelt es sich?"
+    buttons:
+    - title: "Verlust"
+      payload: '/card_lost{"cardtype": {cardtype}, "verlustart": "verlust"}'
+    - title: "Diebstahl"
+      payload: '/card_lost{"cardtype": {cardtype}, "verlustart": "diebstahl"}'
+    - title: "Sonstiges"
+      payload: '/card_lost{"cardtype": {cardtype}, "verlustart": "sonstiges"}'
+  utter_anything_else:
+  - text: Kann ich sonst noch etwas für Sie tun?
+  utter_case_kartensperre:
+  - text: Ich habe erkannt, dass Sie Ihre {cardtype} sperren möchten wegen {verlustart}, stimmt das?
+  utter_what_a_pity:
+  - text: Schade!
+  - text: So was Blödes...
+  - text: Mist!
+  utter_default:
+  - text: Das kann ich leider nicht...
+
+actions:
+- utter_greet
+- utter_what_can_i_do
+- utter_case_kartensperre
+- utter_which_cardtype
+- utter_which_verlustart
+- utter_anything_else
+- utter_what_a_pity
+- utter_goodbye
+- utter_iamabot
+- utter_default
